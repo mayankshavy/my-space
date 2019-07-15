@@ -1,0 +1,40 @@
+#quicksort
+def quickSort(arr, start, end):
+    if(start>=end):
+        return
+    i=partition(arr,start,end)
+    quickSort(arr,start,i-1)
+    quickSort(arr,i+1,end)
+    
+#partition
+def partition(arr,start,end):
+    count=0
+    k=start
+    while(k<end+1):
+        if(arr[start]>arr[k]):
+            count=count+1
+        k=k+1
+    x=start+count
+    arr[start],arr[x]=arr[x],arr[start]
+    k=start
+    j=end
+    while(j!=x and k!=x):
+        if(arr[k]>arr[x]):
+            if(arr[j]<arr[x]):
+                arr[j],arr[k]=arr[k],arr[j]
+                j=j-1
+                k=k+1
+            else:
+                j=j-1
+        if(arr[k]<arr[x]):
+            if(arr[j]>arr[x]):
+                k=k+1
+                j=j-1
+            else:
+                k=k+1
+    return x
+#main
+n=int(input())
+arr=list(int(i) for i in input().strip().split(' '))
+quickSort(arr, 0, n-1)
+print(*arr)
